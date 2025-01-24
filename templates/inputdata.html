@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Dashboard | OpenDash - Tailwind CSS 3 Admin Layout & UI Kit Template</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description">
+    <meta content="MyraStudio" name="author">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script> <!-- For API request -->
+    <link rel="shortcut icon" href="{{ url_for('static', filename='assets/images/favicon.ico') }}">
+    <link href="{{ url_for('static', filename='assets/libs/jsvectormap/css/jsvectormap.min.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ url_for('static', filename='assets/css/icons.min.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ url_for('static', filename='assets/css/app.min.css') }}" rel="stylesheet" type="text/css">
+    <style>
+        /* Sidebar and Content styling omitted for brevity */
+
+        /* Weather widget styling */
+        .weather-widget {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .weather-widget h4 {
+            margin-bottom: 10px;
+        }
+        .weather-widget .temperature {
+            font-size: 2em;
+            font-weight: bold;
+        }
+        .weather-widget .details {
+            font-size: 1em;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <!-- Sidebar and Header omitted for brevity -->
+
+        <div class="page-content">
+            <header class="app-header sticky top-0 z-50 h-topbar flex items-center px-5 bg-white border-b border-default-200">
+                <div class="container flex items-center gap-4">
+                    <!-- Header content omitted for brevity -->
+                </div>
+            </header>
+            <main>
+                <div class="flex items-center md:justify-between flex-wrap gap-2 mb-6">
+                    <h4 class="text-default-900 text-lg font-medium mb-2">Dashboard</h4>
+                    
+                    <div class="md:flex hidden items-center gap-3 text-sm font-semibold">
+                        <a href="#" class="text-sm font-medium text-default-700">Menu</a>
+                        <i class="material-symbols-rounded text-xl flex-shrink-0 text-default-500">chevron_right</i>
+                        <a href="#" class="text-sm font-medium text-default-700" aria-current="page">Dashboard</a>
+                    </div>
+                </div>
+
+                <!-- Weather Widget -->
+                <div class="weather-widget" id="weather">
+                    <h4>Current Weather</h4>
+                    <div class="temperature" id="temperature">-- °C</div>
+                    <div class="details" id="weather-details">Fetching weather data...</div>
+                </div>
+
+                <div class="grid xl:grid-cols-3 md:grid-cols-2 gap-6 mb-6">
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Demo Input Form</h5>
+                                <form action="/submit" method="POST">
+                                    <label for="sement">Sement:</label>
+                                    <input type="text" name="sement" placeholder="Enter the value" required>
+                                    <label for="bricks">Bricks:</label>
+                                    <input type="text" name="bricks" placeholder="Enter the value" required>
+                                    <br><br>
+                                    <center>
+                                        <input type="submit" class="btn-danger" value="Submit">
+                                    </center>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+
+            <footer class="footer bg-white h-16 flex items-center px-6 border-t border-gray-200">
+                <div class="container flex md:justify-between justify-center w-full gap-4">
+                    <div>
+                        <script>document.write(new Date().getFullYear())</script> © OpenDash
+                    </div>
+                    <div class="md:flex hidden gap-2 item-center md:justify-end">
+                        Design &amp; Develop by <a href="#" class="text-primary">MyraStudio</a>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='assets/libs/jquery/jquery.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='assets/libs/preline/preline.js') }}"></script>
+    <script src="{{ url_for('static', filename='assets/libs/iconify-icon/iconify-icon.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='assets/js/app.js') }}"></script>
+    <script src="{{ url_for('static', filename='assets/js/pages/dashboard.js') }}"></script>
+
+    <!-- JavaScript to Fetch Weather Data -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const apiKey = 'd6bdb1dbb5fa2048ac4ed0f369b4c982';  // Replace with your API key
+            const city = 'London';  // You can change the city here
+            const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+
+            // Fetch weather data
+            axios.get(apiUrl)
+                .then(response => {
+                    const data = response.data;
+                    document.getElementById('temperature').innerHTML = `${data.main.temp} °C`;
+                    document.getElementById('weather-details').innerHTML = `${data.weather[0].description}, Humidity: ${data.main.humidity}%`;
+                })
+                .catch(error => {
+                    document.getElementById('weather-details').innerHTML = 'Failed to fetch weather data';
+                    console.error('Error fetching weather data:', error);
+                });
+        });
+    </script>
+</body>
+</html>

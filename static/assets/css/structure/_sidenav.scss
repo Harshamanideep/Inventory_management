@@ -1,0 +1,49 @@
+//
+// _sidenav.scss
+//
+
+
+aside+.page-content {
+    @apply lg:ms-sidenav;
+}
+
+#app-menu {
+    [data-simplebar] {
+        @apply h-[calc(100%-theme('spacing.topbar'))];
+    }
+}
+
+// Hidden Sidenav View ( Fullscreen page content view)
+@screen lg {
+    #app-menu {
+
+        &.opened {
+            @apply -ms-sidenav;
+
+            &+.page-content {
+                @apply ms-0;
+            }
+        }
+    }
+}
+
+
+// Menu Active
+.admin-menu {
+
+    a.active {
+        @apply text-primary bg-primary/10;
+
+        .material-symbols-rounded {
+            @apply fill-1;
+        }
+    }
+
+    .hs-accordion.active>.hs-accordion-toggle.hs-accordion-active\:bg-default-100 {
+        @apply text-primary bg-primary/10;
+    }
+
+    .hs-accordion-content .active {
+        @apply text-primary bg-transparent;
+    }
+}

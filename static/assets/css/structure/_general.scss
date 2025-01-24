@@ -1,0 +1,18 @@
+//
+// _sidenav.scss
+//
+
+
+.wrapper {
+    @apply flex flex-col min-h-full;
+}
+
+// Page Content
+.page-content {
+    @apply flex flex-col flex-auto relative transition-all duration-300;
+}
+
+main {
+    // @apply flex-grow py-6 px-6; 
+    @apply flex-grow container py-6;
+}
