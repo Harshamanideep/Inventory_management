@@ -1,1 +1,3 @@
 # Inventory_management
+
+Imagine a streamlined solution for keeping tabs on solid or liquid assets, making life easier. By leveraging IoT (Internet of Things) for inventory management, we cut down on unnecessary human labor and automate the process between measurement and order placement. This boosts efficiency in managing stock. Our solution uses an ultrasonic transducer and a processing device like a Raspberry Pi, which connects to the Internet to measure inventory levels. It then automatically sends an email to the supplier or company personnel for order placement and displays the current stock on a web page hosted by our system. Simple, automated, and efficient.
